@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////  class Sign  ///////////////////////////////////////
 //This class reprsents the composite shape "sign"
 //The sign is composed of 2 Recatngles
-/*				
+/*
 
 					 ------------------
 					|				   |
@@ -21,6 +21,7 @@
 */
 
 //Note: sign reference point is the center point of the top rectangle
+
 class Sign :public shape
 {
 	Rect* base;
@@ -28,9 +29,11 @@ class Sign :public shape
 public:
 	Sign(game* r_pGame, point ref);
 	virtual void draw() const;
-
-
+	void Rotate90Clockwise(const point& center);
 };
+
+
+
 
 class car : public shape {
 private:
@@ -41,6 +44,8 @@ private:
 public:
 	car(game* r_pGame, point ref);
 	virtual void draw() const;
+	void moveup(double d);
+	void Rotate90Clockwise(const point& center);
 };
 
 
@@ -58,6 +63,7 @@ private:
 public:
 	Robot(game* r_pGame, point ref);
 	virtual void draw() const;
+	void Rotate90Clockwise(const point& center);
 };
 
 
@@ -74,7 +80,8 @@ private:
 
 public:
 	Boat(game* r_pGame, point ref);
-	virtual void draw() const ;
+	virtual void draw() const;
+	void Rotate90Clockwise(const point& center);
 };
 
 
@@ -88,6 +95,7 @@ private:
 public:
 	Rocket(game* r_pGame, point ref);
 	virtual void draw() const;
+	void Rotate90Clockwise(const point& center);
 };
 
 
@@ -100,4 +108,5 @@ private:
 public:
 	Home(game* r_pGame, point ref);
 	virtual void draw() const override;
+	void Rotate90Clockwise(const point& center);
 };

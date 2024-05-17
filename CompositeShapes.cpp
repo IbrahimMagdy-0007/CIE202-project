@@ -2,25 +2,24 @@
 #include "gameConfig.h"
 
 ////////////////////////////////////////////////////  class Sign  ///////////////////////////////////////
-Sign::Sign(game* r_pGame, point ref):shape(r_pGame, ref)
+Sign::Sign(game* r_pGame, point ref) :shape(r_pGame, ref)
 {
-	//calc the ref point of the Sign base and top rectangles relative to the Sign shape
-	point topRef = ref;	//top rect ref is the same as the sign
-	point baseRef = { ref.x, ref.y + config.sighShape.topHeight / 2 + config.sighShape.baseHeight / 2 };
-	top = new Rect(pGame, topRef, config.sighShape.topHeight, config.sighShape.topWdth);
-	base = new Rect(pGame, baseRef, config.sighShape.baseHeight, config.sighShape.baseWdth);
+    //calc the ref point of the Sign base and top rectangles relative to the Sign shape
+    point topRef = ref;	//top rect ref is the same as the sign
+    point baseRef = { ref.x, ref.y + config.sighShape.topHeight / 2 + config.sighShape.baseHeight / 2 };
+    top = new Rect(pGame, topRef, config.sighShape.topHeight, config.sighShape.topWdth);
+    base = new Rect(pGame, baseRef, config.sighShape.baseHeight, config.sighShape.baseWdth);
 }
 
 void Sign::draw() const
 {
-	base->draw();
-	top->draw();
+    base->draw();
+    top->draw();
 }
-
-
-
-
-
+void Sign::Rotate90Clockwise(const point& center) {
+    base->Rotate90Clockwise(center);
+    top->Rotate90Clockwise(center);
+}
 
 car::car(game* r_pGame, point ref) : shape(r_pGame, ref) {
 
@@ -32,36 +31,43 @@ car::car(game* r_pGame, point ref) : shape(r_pGame, ref) {
 
 
     bodyRef = ref;
-    wheel1Ref = { ref.x - (config.carShape.wheel1Radius * 2), ref.y+15 };
-    wheel2Ref = { ref.x + (config.carShape.wheel2Radius * 2), ref.y+15 };
+    wheel1Ref = { ref.x - (config.carShape.wheel1Radius * 2), ref.y + 15 };
+    wheel2Ref = { ref.x + (config.carShape.wheel2Radius * 2), ref.y + 15 };
     headRef = { ref.x ,ref.y - 20 };
     // Create the car body and wheels with their respective reference points
     body = new Rect(pGame, bodyRef, config.carShape.bodyHeight, config.carShape.bodyWidth);
     wheel1 = new circle(pGame, wheel1Ref, config.carShape.wheel1Radius);
     wheel2 = new circle(pGame, wheel2Ref, config.carShape.wheel2Radius);
-    head = new Rect(pGame, headRef, config.carShape.bodyHeight-20, config.carShape.bodyWidth-20);
+    head = new Rect(pGame, headRef, config.carShape.bodyHeight - 20, config.carShape.bodyWidth - 20);
 };
 
-    void car:: draw() const {
-        
-        
-        body->draw();
-        wheel1->draw();
-        wheel2->draw();
-        head->draw();
-    }
+void car::draw() const {
 
 
-    Robot::Robot(game* r_pGame, point ref) : shape(r_pGame, ref) {
-    
+    body->draw();
+    wheel1->draw();
+    wheel2->draw();
+    head->draw();
+}
+void car::Rotate90Clockwise(const point& center) {
+    body->Rotate90Clockwise(center);
+    wheel1->Rotate90Clockwise(center);
+    wheel2->Rotate90Clockwise(center);
+    head->Rotate90Clockwise(center);
+}
+
+
+
+Robot::Robot(game* r_pGame, point ref) : shape(r_pGame, ref) {
+
     point bodyRef = ref;
-    point headRef = { ref.x, ref.y - config.RobotShape.bodyHeight/1.5 };
-    point leftEyeRef = { ref.x - config.RobotShape.bodyWidth/6 , ref.y - config.RobotShape.bodyHeight  + config.RobotShape.headRadius*1.5  };
-    point rightEyeRef = { ref.x + config.RobotShape.bodyWidth/6 , ref.y - config.RobotShape.bodyHeight  + config.RobotShape.headRadius*1.5  };
-    point leftFootRef = { ref.x - config.RobotShape.bodyWidth/2 , ref.y + config.RobotShape.bodyHeight };
-    point rightFootRef = { ref.x + config.RobotShape.bodyWidth  - config.RobotShape.footWidth, ref.y + config.RobotShape.bodyHeight };
+    point headRef = { ref.x, ref.y - config.RobotShape.bodyHeight / 1.5 };
+    point leftEyeRef = { ref.x - config.RobotShape.bodyWidth / 6 , ref.y - config.RobotShape.bodyHeight + config.RobotShape.headRadius * 1.5 };
+    point rightEyeRef = { ref.x + config.RobotShape.bodyWidth / 6 , ref.y - config.RobotShape.bodyHeight + config.RobotShape.headRadius * 1.5 };
+    point leftFootRef = { ref.x - config.RobotShape.bodyWidth / 2 , ref.y + config.RobotShape.bodyHeight };
+    point rightFootRef = { ref.x + config.RobotShape.bodyWidth - config.RobotShape.footWidth, ref.y + config.RobotShape.bodyHeight };
 
-    
+
     body = new Rect(pGame, bodyRef, config.RobotShape.bodyHeight, config.RobotShape.bodyWidth);
     head = new circle(pGame, headRef, config.RobotShape.headRadius);
     leftEye = new circle(pGame, leftEyeRef, config.RobotShape.eyeRadius);
@@ -79,15 +85,24 @@ void Robot::draw() const {
     rightFoot->draw();
 }
 
+void Robot::Rotate90Clockwise(const point& center) {
+    body->Rotate90Clockwise(center);
+    head->Rotate90Clockwise(center);
+    leftEye->Rotate90Clockwise(center);
+    rightEye->Rotate90Clockwise(center);
+    leftFoot->Rotate90Clockwise(center);
+    rightFoot->Rotate90Clockwise(center);
+}
+
 
 
 Boat::Boat(game* r_pGame, point ref) : shape(r_pGame, ref) {
 
-    point hullRef = { ref.x - config.BoatShape.mastWidth / 2,ref.y - config.BoatShape.hullHeight  };
-    point cabinRef = { ref.x - config.BoatShape.hullWidth  + config.BoatShape.cabinWidth / 2, ref.y + config.BoatShape.hullHeight / 2 };
-    point mastRef = { ref.x- config.BoatShape.mastWidth , ref.y - config.BoatShape.hullHeight / 8 - config.BoatShape.mastHeight / 2};
+    point hullRef = { ref.x - config.BoatShape.mastWidth / 2,ref.y - config.BoatShape.hullHeight };
+    point cabinRef = { ref.x - config.BoatShape.hullWidth + config.BoatShape.cabinWidth / 2, ref.y + config.BoatShape.hullHeight / 2 };
+    point mastRef = { ref.x - config.BoatShape.mastWidth , ref.y - config.BoatShape.hullHeight / 8 - config.BoatShape.mastHeight / 2 };
     point sailRef = { ref.x - config.BoatShape.mastWidth , ref.y - config.BoatShape.hullHeight / 2 - config.BoatShape.mastHeight };
-    point flagRef = { ref.x-config.BoatShape.mastWidth / 3, ref.y - config.BoatShape.hullHeight / 2 - config.BoatShape.mastHeight };
+    point flagRef = { ref.x - config.BoatShape.mastWidth / 3, ref.y - config.BoatShape.hullHeight / 2 - config.BoatShape.mastHeight };
 
 
     hull = new Rect(pGame, hullRef, config.BoatShape.hullHeight, config.BoatShape.hullWidth);
@@ -106,12 +121,21 @@ void Boat::draw() const {
 }
 
 
+void Boat::Rotate90Clockwise(const point& center) {
+    hull->Rotate90Clockwise(center);
+    cabin->Rotate90Clockwise(center);
+    mast->Rotate90Clockwise(center);
+    sail->Rotate90Clockwise(center);
+    flag->Rotate90Clockwise(center);
+}
+
+
 Rocket::Rocket(game* r_pGame, point ref) : shape(r_pGame, ref) {
 
     point bodyRef = ref;
-    point fin1Ref = { ref.x , ref.y + config.RocketShape.bodyHeight/2 };
-    point fin2Ref = { ref.x , ref.y +config.RocketShape.bodyHeight/1.75 };
-    point noseRef = { ref.x , ref.y -config.RocketShape.bodyHeight/1.75 };
+    point fin1Ref = { ref.x , ref.y + config.RocketShape.bodyHeight / 2 };
+    point fin2Ref = { ref.x , ref.y + config.RocketShape.bodyHeight / 1.75 };
+    point noseRef = { ref.x , ref.y - config.RocketShape.bodyHeight / 1.75 };
 
 
     body = new Rect(pGame, bodyRef, config.RocketShape.bodyHeight, config.RocketShape.bodyWidth);
@@ -127,14 +151,21 @@ void Rocket::draw() const {
     top->draw();
 }
 
+void Rocket::Rotate90Clockwise(const point& center) {
+    body->Rotate90Clockwise(center);
+    fin1->Rotate90Clockwise(center);
+    fin2->Rotate90Clockwise(center);
+    top->Rotate90Clockwise(center);
+}
+
 
 Home::Home(game* r_pGame, point ref) : shape(r_pGame, ref) {
-    
-    point bodyRef = ref;
-    point roofRef = { ref.x, ref.y - config.HomeShape.roofHeight*1.75};
-    point doorRef = { ref.x , ref.y + config.HomeShape.bodyHeight - config.HomeShape.doorHeight*1.25 };
 
-    
+    point bodyRef = ref;
+    point roofRef = { ref.x, ref.y - config.HomeShape.roofHeight * 1.75 };
+    point doorRef = { ref.x , ref.y + config.HomeShape.bodyHeight - config.HomeShape.doorHeight * 1.25 };
+
+
     body = new Rect(pGame, bodyRef, config.HomeShape.bodyHeight, config.HomeShape.bodyWidth);
     roof = new Triangle(pGame, roofRef, config.HomeShape.roofHeight, config.HomeShape.roofWidth);
     door = new Rect(pGame, doorRef, config.HomeShape.doorHeight, config.HomeShape.doorWidth);
@@ -144,4 +175,10 @@ void Home::draw() const {
     body->draw();
     roof->draw();
     door->draw();
+}
+
+void Home::Rotate90Clockwise(const point& center) {
+    body->Rotate90Clockwise(center);
+    roof->Rotate90Clockwise(center);
+    door->Rotate90Clockwise(center);
 }

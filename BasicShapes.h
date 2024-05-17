@@ -13,16 +13,19 @@
 */
 
 
-class Rect:public shape
+class Rect :public shape
 {
 	int hght, wdth;	//height and width of the recangle
 public:
 	Rect(game* r_pGame, point ref, int r_hght, int r_wdth);
 	virtual void draw() const;
-	void Rotate90Clockwise();
+	void Rotate90Clockwise(const point& center);
+
 
 
 };
+
+
 
 
 ////////////////////////////////////////////////////  class circle  ///////////////////////////////////////
@@ -31,9 +34,11 @@ class circle :public shape
 {
 	//Add data memebrs for class circle
 	int rad;
-public:	
+public:
 	circle(game* r_pGame, point ref, int r);	//add more parameters for the constructor if needed
 	virtual void draw() const;
+	void Rotate90Clockwise(const point& center);
+
 };
 
 
@@ -42,10 +47,13 @@ private:
 	int height, baseWidth;
 
 public:
-	
+
 	Triangle(game* pGame, point ref, int r_height, int r_baseWidth);
 
-	
+
 	virtual void draw() const override;
-	void rotate90Clockwise();
+
+	void Rotate90Clockwise(const point& center);
+
+
 };

@@ -20,9 +20,17 @@ toolbar::toolbar(game* pG)
 	toolbarItemImages[ITM_BOAT] = "images\\toolbarItems\\toolbar_Boat.jpg";
 	toolbarItemImages[ITM_ROCKET] = "images\\toolbarItems\\toolbar_Rocket.jpg";
 	toolbarItemImages[ITM_HOME] = "images\\toolbarItems\\toolbar_Home.jpg";
-	//toolbarItemImages[ITM_INCREASE] = "images\\toolbarItems\\toolbar_INC.jpg";
-
-    toolbarItemImages[ITM_EXIT] = "images\\toolbarItems\\toolbar_Exit.jpg";
+	toolbarItemImages[ITM_INCREASE] = "images\\toolbarItems\\toolbar_INC.jpg";
+	toolbarItemImages[ITM_DECREASE] = "images\\toolbarItems\\toolbar_DEC.jpg";
+	toolbarItemImages[ITM_ROTATE] = "images\\toolbarItems\\toolbar_ROT.jpg";
+	toolbarItemImages[ITM_REFRESH] = "images\\toolbarItems\\toolbar_REF.jpg";
+	toolbarItemImages[ITM_HINT] = "images\\toolbarItems\\toolbar_HINT.jpg";
+	toolbarItemImages[ITM_DELETE] = "images\\toolbarItems\\toolbar_DEL.jpg";
+	toolbarItemImages[ITM_SAVE] = "images\\toolbarItems\\toolbar_SAVE.jpg";
+	toolbarItemImages[ITM_SELECT] = "images\\toolbarItems\\toolbar_SELECT.jpg";
+	toolbarItemImages[ITM_EXIT] = "images\\toolbarItems\\toolbar_Exit.jpg";
+	toolbarItemImages[ITM_INCREASE] = "images\\toolbarItems\\toolbar_INC.jpg";
+	toolbarItemImages[ITM_EXIT] = "images\\toolbarItems\\toolbar_Exit.jpg";
 
 	//TODO: Prepare image for each toolbar item and add it to the list
 

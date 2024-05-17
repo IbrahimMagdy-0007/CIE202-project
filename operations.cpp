@@ -139,3 +139,48 @@ void operaddhome::Act()
 	grid* pGrid = pGame->getGrid();
 	pGrid->setActiveShape(psh);
 }
+operIncrease::operIncrease(game* r_pGame) : operation(r_pGame)
+{}
+
+void operIncrease::Act()
+{
+
+}
+operDecrease::operDecrease(game* r_pGame) : operation(r_pGame) {}
+void operDecrease::Act() {
+
+}
+
+operRotate::operRotate(game* r_pGame) : operation(r_pGame) {}
+void operRotate::Act()
+{
+
+}
+
+operRefresh::operRefresh(game* r_pGame) : operation(r_pGame) {}
+void operRefresh::Act() {
+
+}
+
+operHint::operHint(game* r_pGame) : operation(r_pGame) {}
+void operHint::Act() {
+
+}
+
+operDelete::operDelete(game* r_pGame) : operation(r_pGame) {}
+void operDelete::Act() {
+
+}
+
+operSave::operSave(game* r_pGame) : operation(r_pGame) {}
+void operSave::Act() {
+
+}
+
+operSelect::operSelect(game* r_pGame) : operation(r_pGame) {}
+void operSelect::Act() {
+
+}
+oppdelete::oppdelete(game* r_pGame) :operation(r_pGame)
+{
+}

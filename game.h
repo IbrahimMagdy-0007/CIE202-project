@@ -34,7 +34,7 @@ public:
 	//creates an operation according to the toolbar item clicked
 	operation* createRequiredOperation(toolbarItem clickedItem);
 
-
+	std::string toolbarItemNames[ITM_CNT];
 
 	void run();	//start the game
 

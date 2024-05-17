@@ -6,6 +6,24 @@
 game::game()
 {
 
+
+	toolbarItemNames[ITM_SIGN] = "Sign";
+	toolbarItemNames[ITM_Robot] = "Robot";
+	toolbarItemNames[ITM_CAR] = "Car";
+	toolbarItemNames[ITM_BOAT] = "Boat";
+	toolbarItemNames[ITM_ROCKET] = "Rocket";
+	toolbarItemNames[ITM_HOME] = "Home";
+	toolbarItemNames[ITM_INCREASE] = "Increase";
+	toolbarItemNames[ITM_DECREASE] = "Decrease";
+	toolbarItemNames[ITM_ROTATE] = "Rotate";
+	toolbarItemNames[ITM_REFRESH] = "Refresh";
+	toolbarItemNames[ITM_HINT] = "Hint";
+	toolbarItemNames[ITM_DELETE] = "Delete";
+	toolbarItemNames[ITM_SAVE] = "Save";
+	toolbarItemNames[ITM_SELECT] = "Select";
+	toolbarItemNames[ITM_EXIT] = "Exit";
+
+
 	//Create the main window
 	createWind(config.windWidth, config.windHeight, config.wx, config.wy);
 
@@ -28,7 +46,7 @@ game::~game()
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-void game::createWind(int w, int h, int x, int y) 
+void game::createWind(int w, int h, int x, int y)
 {
 	pWind = new window(w, h, x, y);
 	pWind->SetBrush(config.bkGrndColor);
@@ -52,7 +70,7 @@ void game::createToolBar()
 }
 
 void game::createGrid()
-{	
+{
 	//calc some grid parameters
 	point gridUpperLeftPoint = { 0, config.toolBarHeight };
 	int gridHeight = config.windHeight - config.toolBarHeight - config.statusBarHeight;
@@ -62,7 +80,7 @@ void game::createGrid()
 
 operation* game::createRequiredOperation(toolbarItem clickedItem)
 {
-	operation* op=nullptr;
+	operation* op = nullptr;
 	switch (clickedItem)
 	{
 	case ITM_SIGN:
@@ -83,11 +101,36 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_HOME:
 		op = new operaddhome(this);
 		break;
-	
+	case ITM_INCREASE:
+		op = new operIncrease(this);
+		break;
+	case ITM_DECREASE:
+		op = new operDecrease(this);
+		break;
+	case ITM_ROTATE:
+		op = new operRotate(this);
+		break;
+	case ITM_REFRESH:
+		op = new operRefresh(this);
+		break;
+	case ITM_HINT:
+		op = new operHint(this);
+		break;
+	case ITM_DELETE:
+		op = new operDelete(this);
+		break;
+	case ITM_SAVE:
+		op = new operSave(this);
+		break;
+	case ITM_SELECT:
+		op = new operSelect(this);
+		break;
+	case ITM_EXIT:
+		// Handle exit operation here
+		break;
 	}
 	return op;
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -142,7 +185,7 @@ grid* game::getGrid() const
 
 
 ////////////////////////////////////////////////////////////////////////
-void game::run() 
+void game::run()
 {
 	//This function reads the position where the user clicks to determine the desired operation
 	int x, y;
@@ -150,18 +193,22 @@ void game::run()
 
 	//Change the title
 	pWind->ChangeTitle("- - - - - - - - - - SHAPE HUNT (CIE 101 / CIE202 - project) - - - - - - - - - -");
-	toolbarItem clickedItem=ITM_CNT;
+	toolbarItem clickedItem = ITM_CNT;
 	do
 	{
 		//printMessage("Ready...");
 		//1- Get user click
-		pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+		pWind->WaitMouseClick(x, y);    //Get the coordinates of the user click
 
 		//2-Explain the user click
 		//If user clicks on the Toolbar, ask toolbar which item is clicked
 		if (y >= 0 && y < config.toolBarHeight)
 		{
-			clickedItem=gameToolbar->getItemClicked(x);
+			clickedItem = gameToolbar->getItemClicked(x);
+
+			// Print a message to the status bar
+			string message = "Clicked on " + toolbarItemNames[clickedItem];
+			printMessage(message);
 
 			//3-create the approp operation accordin to item clicked by the user
 			operation* op = createRequiredOperation(clickedItem);
@@ -171,7 +218,8 @@ void game::run()
 			//4-Redraw the grid after each action
 			shapesGrid->draw();
 
-		}	
+		}
 
-	} while (clickedItem!=ITM_EXIT);
+	} while (clickedItem != ITM_EXIT);
 }
+

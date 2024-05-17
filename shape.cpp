@@ -10,7 +10,3 @@ shape::shape(game* r_pGame, point ref)
 	borderColor = config.penColor;
 }
 
-void shape::setRefPoint(point p)
-{
-	RefPoint = p;
-}

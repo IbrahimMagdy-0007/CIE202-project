@@ -88,10 +88,16 @@ enum toolbarItem //The items of the  toolbar (you should add more items)
 	ITM_CAR,
 	ITM_BOAT,
 	ITM_HOME,
-	ITM_EXIT,		//Exit item
-	//TODO: Add more items names here
-
-	ITM_CNT		//no. of toolbar items ==> This should be the last line in this enum
+	ITM_INCREASE,
+	ITM_DECREASE,
+	ITM_ROTATE,
+	ITM_REFRESH,
+	ITM_HINT,
+	ITM_DELETE,
+	ITM_SAVE,
+	ITM_SELECT,
+	ITM_EXIT,
+	ITM_CNT	//no. of toolbar items ==> This should be the last line in this enum
 
 };
 
