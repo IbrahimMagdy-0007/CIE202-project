@@ -30,6 +30,13 @@ public:
 	Sign(game* r_pGame, point ref);
 	virtual void draw() const;
 	void Rotate90Clockwise(const point& center);
+	point getRefPoint();
+	void resizeUp();
+	void resizeDown();
+	virtual void moveup(double d);
+	virtual void movedown(double d);
+	virtual void moveright(double d);
+	virtual void moveleft(double d);
 };
 
 
@@ -44,8 +51,14 @@ private:
 public:
 	car(game* r_pGame, point ref);
 	virtual void draw() const;
-	void moveup(double d);
 	void Rotate90Clockwise(const point& center);
+	point getRefPoint();
+	void resizeUp();
+	void resizeDown();
+	virtual void moveup(double d);
+	virtual void movedown(double d);
+	virtual void moveright(double d);
+	virtual void moveleft(double d);
 };
 
 
@@ -64,6 +77,13 @@ public:
 	Robot(game* r_pGame, point ref);
 	virtual void draw() const;
 	void Rotate90Clockwise(const point& center);
+	point getRefPoint();
+	void resizeUp();
+	void resizeDown();
+	virtual void moveup(double d);
+	virtual void movedown(double d);
+	virtual void moveright(double d);
+	virtual void moveleft(double d);
 };
 
 
@@ -82,6 +102,13 @@ public:
 	Boat(game* r_pGame, point ref);
 	virtual void draw() const;
 	void Rotate90Clockwise(const point& center);
+	point getRefPoint();
+	void resizeUp();
+	void resizeDown();
+	virtual void moveup(double d);
+	virtual void movedown(double d);
+	virtual void moveright(double d);
+	virtual void moveleft(double d);
 };
 
 
@@ -96,6 +123,13 @@ public:
 	Rocket(game* r_pGame, point ref);
 	virtual void draw() const;
 	void Rotate90Clockwise(const point& center);
+	void resizeUp();
+	void resizeDown();
+	point getRefPoint();
+	virtual void moveup(double d);
+	virtual void movedown(double d);
+	virtual void moveright(double d);
+	virtual void moveleft(double d);
 };
 
 
@@ -109,4 +143,11 @@ public:
 	Home(game* r_pGame, point ref);
 	virtual void draw() const override;
 	void Rotate90Clockwise(const point& center);
+	void resizeUp();
+	void resizeDown();
+	point getRefPoint();
+	virtual void moveup(double d);
+	virtual void movedown(double d);
+	virtual void moveright(double d);
+	virtual void moveleft(double d);
 };

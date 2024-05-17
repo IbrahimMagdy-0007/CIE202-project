@@ -102,10 +102,10 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 		op = new operaddhome(this);
 		break;
 	case ITM_INCREASE:
-		op = new operIncrease(this);
+		op = new resizeUp(this);
 		break;
 	case ITM_DECREASE:
-		op = new operDecrease(this);
+		op = new resizeDown(this);
 		break;
 	case ITM_ROTATE:
 		op = new operRotate(this);
@@ -190,7 +190,8 @@ void game::run()
 	//This function reads the position where the user clicks to determine the desired operation
 	int x, y;
 	bool isExit = false;
-
+	operation* op;
+	char keyPressed;
 	//Change the title
 	pWind->ChangeTitle("- - - - - - - - - - SHAPE HUNT (CIE 101 / CIE202 - project) - - - - - - - - - -");
 	toolbarItem clickedItem = ITM_CNT;
@@ -198,8 +199,7 @@ void game::run()
 	{
 		//printMessage("Ready...");
 		//1- Get user click
-		pWind->WaitMouseClick(x, y);    //Get the coordinates of the user click
-
+		pWind->GetMouseClick(x, y);    //Get the coordinates of the user click
 		//2-Explain the user click
 		//If user clicks on the Toolbar, ask toolbar which item is clicked
 		if (y >= 0 && y < config.toolBarHeight)
@@ -219,7 +219,36 @@ void game::run()
 			shapesGrid->draw();
 
 		}
+		pWind->GetKeyPress(keyPressed);
+		if (shapesGrid->getActiveshape() != nullptr) {
+			if (keyPressed) {
+				if (keyPressed == 8 || keyPressed == 'w') {
+					printMessage("ARROW_UP/W is being clicked");
+					op = new moveup(this);
+					op->Act();
+					shapesGrid->draw();
+				}
+				else if (keyPressed == 2 || keyPressed == 's') {
+					printMessage("ARROW_DOWN/S is being clicked");
+					op = new movedown(this);
+					op->Act();
+					shapesGrid->draw();
+				}
+				else if (keyPressed == 6 || keyPressed == 'd') {
+					printMessage("ARROW_RIGHT/D is being clicked");
+					op = new moveright(this);
+					op->Act();
+					shapesGrid->draw();
+				}
+				else if (keyPressed == 4 || keyPressed == 'a') {
+					printMessage("ARROW_LEFT/A is being clicked");
+					op = new moveleft(this);
+					op->Act();
+					shapesGrid->draw();
+				}
 
-	} while (clickedItem != ITM_EXIT);
+			}
+		}
+		
+	}while (clickedItem != ITM_EXIT);
 }
-

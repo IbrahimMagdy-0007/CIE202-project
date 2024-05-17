@@ -61,17 +61,17 @@ public:
 	operaddhome(game* r_pGame);
 	virtual void Act();
 };
-class operIncrease : public operation
+class resizeUp : public operation
 {
 public:
-	operIncrease(game* r_pGame);
+	resizeUp(game* r_pGame);
 	virtual void Act();
 };
 
-class operDecrease : public operation
+class resizeDown : public operation
 {
 public:
-	operDecrease(game* r_pGame);
+	resizeDown(game* r_pGame);
 	virtual void Act();
 };
 
@@ -126,4 +126,31 @@ class oppdelete :public operation
 public:
 	oppdelete(game* r_pGame);
 
+};
+class moveup :public operation
+{
+public:
+	moveup(game* r_pGame);
+	virtual void Act();
+};
+
+class movedown :public operation
+{
+public:
+	movedown(game* r_pGame);
+	virtual void Act();
+};
+
+class moveright :public operation
+{
+public:
+	moveright(game* r_pGame);
+	virtual void Act();
+};
+
+class moveleft :public operation
+{
+public:
+	moveleft(game* r_pGame);
+	virtual void Act();
 };

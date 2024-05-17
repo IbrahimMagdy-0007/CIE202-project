@@ -20,6 +20,8 @@ public:
 	Rect(game* r_pGame, point ref, int r_hght, int r_wdth);
 	virtual void draw() const;
 	void Rotate90Clockwise(const point& center);
+	void resizeUp() override;
+	void resizeDown() override;
 
 
 
@@ -38,6 +40,8 @@ public:
 	circle(game* r_pGame, point ref, int r);	//add more parameters for the constructor if needed
 	virtual void draw() const;
 	void Rotate90Clockwise(const point& center);
+	void resizeUp() override;
+	void resizeDown() override;
 
 };
 
@@ -54,6 +58,8 @@ public:
 	virtual void draw() const override;
 
 	void Rotate90Clockwise(const point& center);
+	void resizeUp() override;
+	void resizeDown() override;
 
 
 };
