@@ -46,6 +46,7 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
+	
 							  
 	//-- The following functions should be supported by the shape class
 	//-- It should be overridden by each inherited shape

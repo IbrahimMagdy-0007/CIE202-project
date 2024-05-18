@@ -44,6 +44,7 @@ void shape::moveleft(double d) {
 
 	this->setRefPoint(point2);
 }
+
 void shape::moveright(double d) {
 	point point1 = this->getRefPoint();
 	point point2;
@@ -52,3 +53,4 @@ void shape::moveright(double d) {
 
 	this->setRefPoint(point2);
 }
+
