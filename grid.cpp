@@ -76,4 +76,16 @@ void grid::setActiveShape(shape* actShape)
 	activeShape = actShape;
 }
 
+shape* grid::getActiveshape()
+{
+	return activeShape;
+}
 
+void grid::delete_shape()
+{
+	if (activeShape != nullptr)
+	{
+		delete activeShape;
+		activeShape = nullptr;
+	}
+}

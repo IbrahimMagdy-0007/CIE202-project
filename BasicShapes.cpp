@@ -33,7 +33,17 @@ void Rect::Rotate90Clockwise(const point& center) {
 	// Swap the width and height
 	swap(wdth, hght);
 }
+void Rect::resizeUp()
+{
+	hght *= 2;
+	wdth *= 2;
+}
 
+void Rect::resizeDown()
+{
+	hght /= 2;
+	wdth /= 2;
+}
 
 ////////////////////////////////////////////////////  class circle  ///////////////////////////////////////
 //TODO: Add implementation for class circle here
@@ -55,6 +65,15 @@ void circle::Rotate90Clockwise(const point& center) {
 	int newCenterY = center.y + (RefPoint.x - center.x);
 	RefPoint.x = newCenterX;
 	RefPoint.y = newCenterY;
+}
+void circle::resizeUp()
+{
+	rad *= 2;
+}
+
+void circle::resizeDown()
+{
+	rad /= 2;
 }
 
 
@@ -93,4 +112,13 @@ void Triangle::Rotate90Clockwise(const point& center) {
 	RefPoint.y = newCenterY;
 	// Swap the base and height
 	swap(baseWidth, height);
+}
+void Triangle::resizeUp()
+{
+	baseWidth *= 2;
+}
+
+void Triangle::resizeDown()
+{
+	baseWidth /= 2;
 }

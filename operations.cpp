@@ -139,15 +139,15 @@ void operaddhome::Act()
 	grid* pGrid = pGame->getGrid();
 	pGrid->setActiveShape(psh);
 }
-operIncrease::operIncrease(game* r_pGame) : operation(r_pGame)
+resizeUp::resizeUp(game* r_pGame) : operation(r_pGame)
 {}
 
-void operIncrease::Act()
+void resizeUp::Act()
 {
 
 }
-operDecrease::operDecrease(game* r_pGame) : operation(r_pGame) {}
-void operDecrease::Act() {
+resizeDown::resizeDown(game* r_pGame) : operation(r_pGame) {}
+void resizeDown::Act() {
 
 }
 
@@ -183,4 +183,53 @@ void operSelect::Act() {
 }
 oppdelete::oppdelete(game* r_pGame) :operation(r_pGame)
 {
+}
+
+moveup::moveup(game* r_pGame):operation(r_pGame)
+{
+}
+
+void moveup::Act()
+{
+	grid* pGrid = pGame->getGrid();
+	shape* currentShape = pGrid->getActiveshape();
+	currentShape->moveup(config.gridSpacing);
+	pGrid->setActiveShape(currentShape);
+}
+
+movedown::movedown(game* r_pGame) :operation(r_pGame)
+{
+}
+
+void movedown::Act()
+{
+	grid* pGrid = pGame->getGrid();
+	shape* currentShape = pGrid->getActiveshape();
+	currentShape->movedown(config.gridSpacing);
+	pGrid->setActiveShape(currentShape);
+}
+
+moveright::moveright(game* r_pGame):operation(r_pGame)
+{
+}
+
+void moveright::Act()
+{
+	grid* pGrid = pGame->getGrid();
+	shape* currentShape = pGrid->getActiveshape();
+	currentShape->moveright(config.gridSpacing);
+	pGrid->setActiveShape(currentShape);
+
+}
+
+moveleft::moveleft(game* r_pGame) :operation(r_pGame)
+{
+}
+
+void moveleft::Act()
+{
+	grid* pGrid = pGame->getGrid();
+	shape* currentShape = pGrid->getActiveshape();
+	currentShape->moveleft(config.gridSpacing);
+	pGrid->setActiveShape(currentShape);
 }
