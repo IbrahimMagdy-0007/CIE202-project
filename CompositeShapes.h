@@ -29,7 +29,7 @@ class Sign :public shape
 public:
 	Sign(game* r_pGame, point ref);
 	virtual void draw() const;
-	void Rotate90Clockwise(const point& center);
+	void Rotate90Clockwise();
 	point getRefPoint();
 	void resizeUp();
 	void resizeDown();
@@ -37,6 +37,8 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
+	virtual void save(ofstream& outfile) override;
+	string gettype();
 };
 
 
@@ -51,7 +53,7 @@ private:
 public:
 	car(game* r_pGame, point ref);
 	virtual void draw() const;
-	void Rotate90Clockwise(const point& center);
+	void Rotate90Clockwise();
 	point getRefPoint();
 	void resizeUp();
 	void resizeDown();
@@ -59,6 +61,8 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
+	virtual void save(ofstream& outfile) override;
+	string gettype();
 };
 
 
@@ -76,7 +80,7 @@ private:
 public:
 	Robot(game* r_pGame, point ref);
 	virtual void draw() const;
-	void Rotate90Clockwise(const point& center);
+	void Rotate90Clockwise();
 	point getRefPoint();
 	void resizeUp();
 	void resizeDown();
@@ -84,6 +88,8 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
+	virtual void save(ofstream& outfile) override;
+	string gettype();
 };
 
 
@@ -101,7 +107,7 @@ private:
 public:
 	Boat(game* r_pGame, point ref);
 	virtual void draw() const;
-	void Rotate90Clockwise(const point& center);
+	void Rotate90Clockwise();
 	point getRefPoint();
 	void resizeUp();
 	void resizeDown();
@@ -109,6 +115,8 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
+	virtual void save(ofstream& outfile) override;
+	string gettype();
 };
 
 
@@ -122,7 +130,7 @@ private:
 public:
 	Rocket(game* r_pGame, point ref);
 	virtual void draw() const;
-	void Rotate90Clockwise(const point& center);
+	void Rotate90Clockwise();
 	void resizeUp();
 	void resizeDown();
 	point getRefPoint();
@@ -130,6 +138,8 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
+	virtual void save(ofstream& outfile) override;
+	string gettype();
 };
 
 
@@ -142,7 +152,7 @@ private:
 public:
 	Home(game* r_pGame, point ref);
 	virtual void draw() const override;
-	void Rotate90Clockwise(const point& center);
+	void Rotate90Clockwise();
 	void resizeUp();
 	void resizeDown();
 	point getRefPoint();
@@ -150,4 +160,6 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
+	virtual void save(ofstream& outfile) override;
+	string gettype();
 };

@@ -5,12 +5,12 @@
 
 ////////////////////////////////////////////////////  class toolbar   //////////////////////////////////////////////
 toolbar::toolbar(game* pG)
-{	
+{
 	height = config.toolBarHeight;
 	width = config.windWidth;
 	this->pGame = pG;
 	window* pWind = pGame->getWind();
-	
+
 	//You can draw the tool bar icons in any way you want.
 
 	//First prepare List of images for each toolbar item
@@ -32,16 +32,65 @@ toolbar::toolbar(game* pG)
 	toolbarItemImages[ITM_INCREASE] = "images\\toolbarItems\\toolbar_INC.jpg";
 	toolbarItemImages[ITM_EXIT] = "images\\toolbarItems\\toolbar_Exit.jpg";
 
+	toolbarItemImages[ITM_Actual_Lives] = to_string(pGame->getCurrentLives());
+	toolbarItemImages[ITM_String_Lives] = " Lives: ";
+	toolbarItemImages[ITM_String_Score] = "Score = ";
+	toolbarItemImages[ITM_Actual_Score] = to_string(pGame->getCurrentScore());
+	toolbarItemImages[ITM_String_Level] = "Level = ";
+	toolbarItemImages[ITM_Actual_Level] = to_string(pGame->getCurrentGameLevel());
+
 	//TODO: Prepare image for each toolbar item and add it to the list
 
 	//Draw toolbar item one image at a time
+	//Draw toolbar item one image at a time
 	for (int i = 0; i < ITM_CNT; i++)
-		pWind->DrawImage(toolbarItemImages[i], i * config.toolbarItemWidth, 0, config.toolbarItemWidth, height);
+	{
+		if (i < 15)
+			pWind->DrawImage(toolbarItemImages[i], i * config.toolbarItemWidth, 0, config.toolbarItemWidth, height);
+		//pWind->DrawImage()
+		else if (i == 15)
+		{
+			pWind->SetPen(RED, 200);
+			pWind->SetFont(20, BOLD, BY_NAME);
+			pWind->DrawString(i * config.toolbarItemWidth + 1, 0, toolbarItemImages[i]);
+		}
+		else if (i == 16)
+		{
+			pWind->SetPen(BLACK, 20);
+			pWind->SetFont(20, BOLD, BY_NAME);
+			pWind->DrawString((i - 1) * config.toolbarItemWidth + 20, 0, toolbarItemImages[i]);
+		}
+		else if (i == 17)
+		{
+			pWind->SetPen(BLACK, 20);
+			pWind->SetFont(20, BOLD, BY_NAME);
+			pWind->DrawString((i - 2) * config.toolbarItemWidth + 1, 18, toolbarItemImages[i]);
+		}
+		else if (i == 18)
+		{
+			pWind->SetPen(BLACK, 20);
+			pWind->SetFont(20, BOLD, BY_NAME);
+			pWind->DrawString((i - 3) * config.toolbarItemWidth + 65, 18, toolbarItemImages[i]);
+		}
+		else if (i == 19)
+		{
+			pWind->SetPen(BLACK, 20);
+			pWind->SetFont(20, BOLD, BY_NAME);
+			pWind->DrawString((i - 4) * config.toolbarItemWidth + 1, 35, toolbarItemImages[i]);
+		}
+		else if (i == 20)
+		{
+			pWind->SetPen(BLACK, 20);
+			pWind->SetFont(20, BOLD, BY_NAME);
+			pWind->DrawString((i - 5) * config.toolbarItemWidth + 60, 35, toolbarItemImages[i]);
+		}
+	}
+
 
 
 	//Draw a line under the toolbar
 	pWind->SetPen(DARKBLUE, 3);
-	pWind->DrawLine(0, height,width , height);
+	pWind->DrawLine(0, height, width, height);
 }
 
 
@@ -49,11 +98,11 @@ toolbar::toolbar(game* pG)
 //handles clicks on toolbar icons, returns ITM_CNT if the click is not inside the toolbar
 toolbarItem toolbar::getItemClicked(int x)
 {
-	
+
 	if (x > ITM_CNT * config.toolbarItemWidth)	//click outside toolbar boundaries
 		return ITM_CNT;
-	
-	
+
+
 	//Check whick toolbar item was clicked
 	//==> This assumes that toolbar items are lined up horizontally <==
 	//Divide x coord of the point clicked by the icon width (int division)
@@ -63,3 +112,45 @@ toolbarItem toolbar::getItemClicked(int x)
 
 }
 
+void toolbar::settimer(int newtime)
+{
+	timer = newtime;
+}
+
+void toolbar::updatetime()
+{
+
+	window* mywindow;
+	mywindow = pGame->getWind();
+	mywindow->SetPen(LAVENDER);
+	mywindow->SetBrush(LAVENDER);
+	mywindow->DrawRectangle(1250,10,1350,30);
+	mywindow->SetPen(BLACK);
+	mywindow->SetFont(24, BOLD, BY_NAME, "Arial");
+	mywindow->DrawString(1260, 12, "timer");
+	mywindow->DrawInteger(1320, 12, timer);
+
+}
+int toolbar::gettime()
+{
+	return timer;
+}
+
+void toolbar::updateLevel() {
+
+	toolbarItemImages[ITM_Actual_Level] = to_string(pGame->getCurrentGameLevel());
+	window* pWind = pGame->getWind();
+	pWind->SetPen(BLACK, 20);
+	pWind->SetFont(20, BOLD, BY_NAME);
+	pWind->DrawString((ITM_Actual_Level - 5) * config.toolbarItemWidth + 60, 35, toolbarItemImages[ITM_Actual_Level]);
+}
+void toolbar::updateLives() {
+
+	toolbarItemImages[ITM_Actual_Lives] = to_string(pGame->getCurrentLives());
+
+
+	window* pWind = pGame->getWind();
+	pWind->SetPen(BLACK, 20);
+	pWind->SetFont(20, BOLD, BY_NAME);
+	pWind->DrawString((ITM_Actual_Lives - 5) * config.toolbarItemWidth + 60, 35, toolbarItemImages[ITM_Actual_Lives]);
+}

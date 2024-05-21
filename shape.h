@@ -35,6 +35,8 @@ protected:
     game* pGame;        //pointer to game object
 	color fillColor;	//shape fill color
 	color borderColor;	//shape border color
+	int rotatecounter = 0;
+	int sizecounter = 0;
 public:
     shape(game* r_pGame, point ref);
     virtual void draw() const=0;//for a shape to draw itself on the screen
@@ -46,7 +48,13 @@ public:
 	virtual void movedown(double d);
 	virtual void moveright(double d);
 	virtual void moveleft(double d);
-	
+	virtual void Rotate90Clockwise() = 0;
+	virtual void save(ofstream& outfile) ;
+	virtual string gettype();
+	virtual int getrotatecounter();
+	virtual int getsizecounter();
+	bool matching(shape* s);
+
 							  
 	//-- The following functions should be supported by the shape class
 	//-- It should be overridden by each inherited shape
@@ -63,3 +71,9 @@ public:
 
 
 
+struct ShapeProperties {
+	
+	int refPointX;
+	int refPointY;
+
+};

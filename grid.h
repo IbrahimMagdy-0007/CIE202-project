@@ -22,10 +22,16 @@ public:
 	grid(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	~grid();
 	void draw() const;
+	void drawAllButActiveShape();
 	void clearGridArea() const;
 	bool addShape(shape* newShape);
 	void setActiveShape(shape* actShape);
 	shape* getActiveshape();
+	shape* getShapesList();
 	void delete_shape();
+	void saveshapes(ofstream& outfile) const;
+	void detectmatching();
+	bool all_matched();
+	
 };
 

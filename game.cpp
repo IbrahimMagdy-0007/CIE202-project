@@ -77,7 +77,7 @@ void game::createGrid()
 	//create the grid
 	shapesGrid = new grid(gridUpperLeftPoint, config.windWidth, gridHeight, this);
 }
-
+int level = 0;
 operation* game::createRequiredOperation(toolbarItem clickedItem)
 {
 	operation* op = nullptr;
@@ -126,7 +126,7 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 		op = new operSelect(this);
 		break;
 	case ITM_EXIT:
-		// Handle exit operation here
+		op = new operExit(this);
 		break;
 	}
 	return op;
@@ -142,12 +142,24 @@ void game::printMessage(string msg) const	//Prints a message on status bar
 	pWind->SetFont(24, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, config.windHeight - (int)(0.85 * config.statusBarHeight), msg);
 }
+void game::cleanUp() {
+	
 
+	if (shapesGrid != nullptr) {
+		delete shapesGrid;
+		shapesGrid = nullptr;
+	}
+}
 
 
 window* game::getWind() const		//returns a pointer to the graphics window
 {
 	return pWind;
+}
+void game::levelUp() {
+
+	Current_gameLevel++;
+	getToolbar()->updateLevel();
 }
 
 
@@ -189,14 +201,31 @@ void game::run()
 {
 	//This function reads the position where the user clicks to determine the desired operation
 	int x, y;
+	int test;
 	bool isExit = false;
 	operation* op;
 	char keyPressed;
+	int timer = clock();
 	//Change the title
 	pWind->ChangeTitle("- - - - - - - - - - SHAPE HUNT (CIE 101 / CIE202 - project) - - - - - - - - - -");
 	toolbarItem clickedItem = ITM_CNT;
 	do
 	{
+	
+		if (clock() - timer > 1000)
+		{
+			timer = clock();
+			timecounter--;
+			gameToolbar->settimer(timecounter);
+			gameToolbar->updatetime();
+			test = gameToolbar->gettime();
+			if (test <= 0)
+			{
+				setCurrentLives(getCurrentLives() - 1);
+				gameToolbar->settimer(500);
+			}
+
+		}
 		//printMessage("Ready...");
 		//1- Get user click
 		pWind->GetMouseClick(x, y);    //Get the coordinates of the user click
@@ -246,9 +275,42 @@ void game::run()
 					op->Act();
 					shapesGrid->draw();
 				}
-
+				shapesGrid->detectmatching();
 			}
 		}
 		
 	}while (clickedItem != ITM_EXIT);
+}
+
+
+
+
+
+int game::getCurrentGameLevel() const
+{
+	return Current_gameLevel;
+}
+
+int game::getCurrentLives() const
+{
+	return Lives;
+}
+
+int game::getCurrentScore() const
+{
+	return Current_score;
+}
+
+void game::setCurrentScore(int num)
+{
+	Current_score = num;
+}
+void game::setCurrentLives(int l)
+{
+	Lives = l;
+}
+
+void game::setCurrentGameLevel(int level)
+{
+	Current_gameLevel = level;
 }

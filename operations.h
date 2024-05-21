@@ -1,5 +1,5 @@
 #pragma once
-
+#include "gameConfig.h"
 class game;
 /////////////////////////////////// class operation  //////////////////
 //Base class of all operations supported by the application
@@ -110,14 +110,16 @@ public:
 	virtual void Act();
 };
 
-class operSelect : public operation
-{
+class operLoad :public operation {
 public:
-	operSelect(game* r_pGame);
+	operLoad(game* r_pGame);
 	virtual void Act();
+};
 
-
-
+class operSelect : public operation {
+public:
+	operSelect(game* r_pGame) : operation(r_pGame) {}
+	void Act();
 };
 
 
@@ -153,4 +155,14 @@ class moveleft :public operation
 public:
 	moveleft(game* r_pGame);
 	virtual void Act();
+}; class operAddRandomShape : public operation {
+public:
+	operAddRandomShape(game* r_pGame);
+	void Act() override;
+};
+class operExit : public operation {
+public:
+	operExit(game* r_pGame) : operation(r_pGame) {}
+
+	void Act() override;
 };
